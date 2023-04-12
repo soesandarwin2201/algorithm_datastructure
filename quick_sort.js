@@ -1,31 +1,28 @@
-function partition(array,lower,upper){
-     let pivot = array[lower];
-     let start = lower;
-     let end = upper;
+//unsorted array
+//return the sorted array
+// pivot first => index 0 1 ,2 array[0]
+//let left , right
+//for loop
+//while => recurise 
 
-     while(start < end) {
-          while(array[start] <= pivot && start < end) {
-               start++;
+function quick_sort(array){
+     let pivot = array[0]; // the first element
+     let leftArray = [];
+     let rightArray = [];
+     if( array.length <= 1){
+          return array;
+     }
+     for(let i = 1; i < array.length ; i++){
+          if(array[i] < pivot){
+               leftArray.push(array[i]);
           }
-          while (array[end] > pivot) {
-               end--;
-          }
-          if(start < end) {
-               [array[start],array[end]] = [array[end], array[start]];
+          else {
+               rightArray.push(array[i]);
           }
      }
-     array[lower]= array[end];
-     array[end] = pivot;
-
-     return end;
+     return [...quick_sort(leftArray),pivot,...quick_sort(rightArray)];
 }
 
-function quickSort(array, left, right) {
-     if (left < right) {
-       let q = partition(array, left, right);
-       quickSort(array, left, q - 1); //sort left sub-array
-       quickSort(array, q + 1, right); //sort right sub-array
-     }
-   }
-
-quickSort([90 ,45, 22, 11, 22 ,50]);
+let array = [5,8,1,3,7,10,2];
+let result = quick_sort(array);
+console.log(result);
